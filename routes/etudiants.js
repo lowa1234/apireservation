@@ -48,10 +48,10 @@ router.post('/', async(req, res) =>{
     }
 });
 
-router.delete('/:id', async(req, res) =>{
+router.delete('/:da', async(req, res) =>{
     await mongoose.connect(process.env.MONGODB_APP_URI);
     try{
-        await Produit.deleteOne({_id: req.params.id});
+        await Etudiant.deleteOne({da: req.params.da});
     } catch(err){
         console.log(err);
         res.status(500).json({erreur: 'Une erreur est survenue...'});
