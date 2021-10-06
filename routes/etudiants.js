@@ -1,14 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-const Produit = require('../models/produits');
-const uri = "mongodb://localhost:27017";
+const Etudiant = require('../models/etudiant');
 
 router.get('/', async(req, res) => {
-    await mongoose.connect(uri);
+    await mongoose.connect(process.env.MONGODB_APP_URI);
     try{
-        const produits = await Produit.find();
-        res.json(produits);
+        const etudiants = await Etudiant.find();
+        res.json(etudiants);
     } catch(err){
         console.log(err);
         res.status(500).json({erreur: 'Une erreur est survenue...'});
@@ -18,7 +17,7 @@ router.get('/', async(req, res) => {
 });
 
 router.get('/sku/:sku', async(req, res) =>{
-    await mongoose.connect(uri);
+    await mongoose.connect(process.env.MONGODB_APP_URI);
     try{
         const produit = await Produit.findOne({sku: req.params.sku});
         if(!produit){
@@ -36,7 +35,7 @@ router.get('/sku/:sku', async(req, res) =>{
 });
 
 router.get('/variants/:sku', async(req, res) =>{
-    await mongoose.connect(uri);
+    await mongoose.connect(process.env.MONGODB_APP_URI);
     try{
         const produits = await Produit.find({sku: req.params.sku}, 'variants');
         if(!produits){
@@ -54,7 +53,7 @@ router.get('/variants/:sku', async(req, res) =>{
 });
 
 router.get('/:categorie/qtenegative', async(req, res) =>{
-    await mongoose.connect(uri);
+    await mongoose.connect(process.env.MONGODB_APP_URI);
     try{
         const produits = await Produit.find({categories: req.params.categorie}).where('stock').lt(0);
         if(!produits){
@@ -72,7 +71,7 @@ router.get('/:categorie/qtenegative', async(req, res) =>{
 });
 
 router.get('/stats/prix-moyen-par-statut', async(req, res) =>{
-    await mongoose.connect(uri);
+    await mongoose.connect(process.env.MONGODB_APP_URI);
     try{
         const produit = await Produit.aggregate([
             {"$group": {
@@ -92,7 +91,7 @@ router.get('/stats/prix-moyen-par-statut', async(req, res) =>{
 });
 
 router.post('/', async(req, res) =>{
-    await mongoose.connect(uri);
+    await mongoose.connect(process.env.MONGODB_APP_URI);
     try{
         const produit = new Produit(req.body);
         const nouveauProduit = await produit.save();
@@ -106,7 +105,7 @@ router.post('/', async(req, res) =>{
 });
 
 router.delete('/:id', async(req, res) =>{
-    await mongoose.connect(uri);
+    await mongoose.connect(process.env.MONGODB_APP_URI);
     try{
         await Produit.deleteOne({_id: req.params.id});
     } catch(err){
