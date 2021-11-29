@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ProduitSchema = new Schema({
-    nom: {type: String, required: true},
-    aile: {type: String, required: true},
-    etage: {type: String, required: true},
-    nb: {type: Number, required: true},
+const LocalSchema = new Schema({
+    nom: {type: String, required: true, maxlength: 5},
+    aile: {type: String, required: true, maxlength: 1},
+    etage: {type: String, required: true, maxlength: 1},
     nbmax: {type: Number, required: true},
+    nbreservation: {type: Number, required: true},
     dispo: {type: Boolean, required: true},
 });
 
-module.exports = mongoose.model('Produit', ProduitSchema);
+module.exports = mongoose.model('Local', LocalSchema);

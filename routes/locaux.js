@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Etudiant = require('../models/etudiant');
+const Local = require('../models/local');
 
 router.get('/', async(req, res) => {
     try{
         await mongoose.connect(process.env.MONGODB_APP_URI);
-        res.json(await Etudiant.find());
+        res.json(await Local.find());
     } catch(err){
         console.log(err);
         res.status(500).json({erreur: 'Une erreur est survenue...'});
@@ -15,10 +15,10 @@ router.get('/', async(req, res) => {
     }
 });
 
-router.get('/:da', async(req, res) =>{
+router.get('/:nom', async(req, res) =>{
     try{
         await mongoose.connect(process.env.MONGODB_APP_URI);
-        res.json(await Etudiant.findOne({da: req.params.da}));
+        res.json(await Local.findOne({nom: req.params.nom}));
     } catch(err){
         console.log(err);
         res.status(500).json({erreur: 'Une erreur est survenue...'});
@@ -30,7 +30,7 @@ router.get('/:da', async(req, res) =>{
 router.post('/', async(req, res) =>{
     try {    
         await mongoose.connect(process.env.MONGODB_APP_URI);
-        res.json(await new Etudiant(req.body).save());
+        res.json(await new Local(req.body).save());
       } catch(err) {
         console.log(err.message);
         res.status(500).json({erreur:'Une erreur est survenue, veuillez contacter votre administrateur'});
@@ -39,10 +39,10 @@ router.post('/', async(req, res) =>{
       }
 });
 
-router.delete('/:da', async(req, res) =>{
+router.delete('/:nom', async(req, res) =>{
     try {
         await mongoose.connect(process.env.MONGODB_APP_URI);
-        res.json(await Etudiant.deleteOne({da:req.params.da}));
+        res.json(await Local.deleteOne({nom:req.params.nom}));
       } catch(err) {
         console.log(err.message);
         res.status(500).json({erreur:'Une erreur est survenue, veuillez contacter votre administrateur'});
