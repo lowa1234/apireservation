@@ -22,7 +22,19 @@ router.get('/', async (req, res) => {
         res.json(await Reservation.findOne({_id: req.params.id}));
     } catch(err){
         console.log(err);
-        res.status(500).json({erreur: 'Une erreur est survenue...'});
+        res.status(500).json({erreur: "La réservation recherchée n'a pu être retrouvée"});
+    } finally{
+        mongoose.connection.close();
+    }
+});
+
+router.get('/:da', async(req, res) =>{
+    try{
+        await mongoose.connect(process.env.MONGODB_APP_URI);
+        res.json(await Reservation.findOne({da_etudiant: req.params.da}));
+    } catch(err){
+        console.log(err);
+        res.status(500).json({erreur: 'Aucune réservation pour cet étudiant'});
     } finally{
         mongoose.connection.close();
     }
