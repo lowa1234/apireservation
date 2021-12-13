@@ -11,7 +11,7 @@ router.get('/', async(req, res) => {
         console.log(err);
         res.status(500).json({erreur: 'Une erreur est survenue...'});
     } finally{
-        mongoose.connection.close();
+        await mongoose.connection.close();
     }
 });
 
