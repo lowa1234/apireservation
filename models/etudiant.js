@@ -6,9 +6,9 @@ const EtudiantSchema = new Schema({
     prenom: {type: String, required: true, maxlength: 50},
     da: {type: String, required: true, maxlength: 7},
     amis: {
-        nom: {type: String, required: true, maxlength: 50},
-        prenom: {type: String, required: true, maxlength: 50},
-        da: {type: String, required: true, maxlength: 7}
+        nom: {type: String, maxlength: 50},
+        prenom: {type: String, maxlength: 50},
+        da: {type: String, maxlength: 7}
     }
 });
 
