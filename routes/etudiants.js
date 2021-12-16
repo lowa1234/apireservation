@@ -39,6 +39,18 @@ router.post('/', async(req, res) =>{
       }
 });
 
+router.put('/:da', async(req, res) =>{
+    try {    
+        await mongoose.connect(process.env.MONGODB_APP_URI);
+        res.json(await Etudiant.updateOne({da:req.params.da},{ $set: {nom: req.body.nom, prenom: req.body.prenom}}));
+      } catch(err) {
+        console.log(err.message);
+        res.status(500).json({erreur:'Une erreur est survenue, veuillez contacter votre administrateur'});
+      } finally {
+        await mongoose.connection.close();
+      }
+});
+
 router.delete('/:da', async(req, res) =>{
     try {
         await mongoose.connect(process.env.MONGODB_APP_URI);
