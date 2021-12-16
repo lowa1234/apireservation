@@ -8,7 +8,7 @@ const EtudiantSchema = new Schema({
     amis: {
         nom: {type: String, maxlength: 50},
         prenom: {type: String, maxlength: 50},
-        da: {type: String, maxlength: 7}
+        da: {type: String, minlength:7, maxlength: 7}
     }
 });
 

@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
       console.log(err.message);
       res.status(500).json({erreur:'Une erreur est survenue, veuillez contacter votre administrateur'});
     } finally {
-      mongoose.connection.close();
+      await mongoose.connection.close();
     }
   });
   
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
         console.log(err);
         res.status(500).json({erreur: "La réservation recherchée n'a pu être retrouvée"});
     } finally{
-        mongoose.connection.close();
+      await mongoose.connection.close();
     }
 });
 
@@ -36,7 +36,7 @@ router.get('/da/:da_etudiant', async(req, res) =>{
         console.log(err);
         res.status(500).json({erreur: 'Aucune réservation pour cet étudiant'});
     } finally{
-        mongoose.connection.close();
+      await mongoose.connection.close();
     }
 });
   
@@ -48,7 +48,7 @@ router.get('/da/:da_etudiant', async(req, res) =>{
       console.log(err.message);
       res.status(500).json({erreur:'Une erreur est survenue, veuillez contacter votre administrateur'});
     } finally {
-      mongoose.connection.close();
+      await mongoose.connection.close();
     }
   });
   
@@ -61,7 +61,7 @@ router.get('/da/:da_etudiant', async(req, res) =>{
       console.log(err.message);
       res.status(500).json({erreur:'Une erreur est survenue, veuillez contacter votre administrateur'});
     } finally {
-      mongoose.connection.close();
+      await mongoose.connection.close();
     }
   });
 

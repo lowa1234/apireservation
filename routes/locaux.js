@@ -23,7 +23,7 @@ router.get('/:nom', async(req, res) =>{
         console.log(err);
         res.status(500).json({erreur: 'Une erreur est survenue...'});
     } finally{
-        mongoose.connection.close();
+        await mongoose.connection.close();
     }
 });
 
@@ -35,7 +35,7 @@ router.post('/', async(req, res) =>{
         console.log(err.message);
         res.status(500).json({erreur:'Une erreur est survenue, veuillez contacter votre administrateur'});
       } finally {
-        mongoose.connection.close();
+        await mongoose.connection.close();
       }
 });
 
@@ -47,7 +47,7 @@ router.delete('/:nom', async(req, res) =>{
         console.log(err.message);
         res.status(500).json({erreur:'Une erreur est survenue, veuillez contacter votre administrateur'});
       } finally {
-        mongoose.connection.close();
+        await mongoose.connection.close();
       }
 });
 
