@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
   });
   
 
-  router.get('/id/:id', async(req, res) =>{
+  router.get('/:id', async(req, res) =>{
     try{
         await mongoose.connect(process.env.MONGODB_APP_URI);
         res.json(await Reservation.findOne({_id: req.params.id}));
@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
 router.get('/da/:da_etudiant', async(req, res) =>{
     try{
         await mongoose.connect(process.env.MONGODB_APP_URI);
-        res.json(await Reservation.findOne({da_etudiant: req.params.da_etudiant}));
+        res.json(await Reservation.find({da_etudiant: req.params.da_etudiant}));
     } catch(err){
         console.log(err);
         res.status(500).json({erreur: 'Aucune réservation pour cet étudiant'});
