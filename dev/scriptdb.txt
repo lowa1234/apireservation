@@ -1,0 +1,4 @@
+use cegep
+db.etudiants.insert({nom: "Test", prenom: "Test", da: "1234567", amis:{nom: "Bourassa", "Jean-Philippe", da: "1584245"}})
+db.etudiants.insert({nom: "Test", prenom: "Test", da: "1234567", amis:{nom: "Bourassa", "Jean-Philippe", da: "1584245"}})
+db.locaux.insert({nom: "C-205", aile: "C", etage: "2", nbmax: 8, nbreservation: 0, dispo: true})
